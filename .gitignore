@@ -1,0 +1,88 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Environment variables — NEVER commit secrets
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+!.env.example
+!**/.env.example
+
+# Build output
+dist/
+build/
+backend/dist/
+frontend/dist/
+*.tsbuildinfo
+frontend/tsconfig.tsbuildinfo
+
+# Vite
+.vite/
+frontend/.vite/
+
+# Test / coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Caches
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.turbo/
+.next/
+.nuxt/
+
+# IDE / editors
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.qwen/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Local DB / dumps
+*.sqlite
+*.sqlite3
+*.db
+*.sql.bak
+*.dump
+
+# Uploads / runtime data
+uploads/
+backend/uploads/
+tmp/
+temp/
+
+# Secrets / keys
+*.pem
+*.key
+*.crt
+*.p12
+
+# Misc
+.history/
+.tmp/

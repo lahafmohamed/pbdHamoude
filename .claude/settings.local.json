@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /tmp/design)",
+      "Bash(tar -xzf \"/c/Users/Mohamed/.claude/projects/C--Users-Mohamed-Desktop-projet-magasinProgramme/a86e5ace-2d6e-4c9f-9aea-c1ee1cf55afa/tool-results/webfetch-1777909934200-ov43cm.bin\" -C /tmp/design)",
+      "Read(//tmp/**)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(xargs grep -l \"Acompte\\\\|acompte\")",
+      "Bash(timeout 60 npx vitest run src/controllers/AcompteFournisseurController.test.ts)",
+      "Bash(PGPASSWORD= psql -U postgres -h localhost -d magasin_db -c \"SELECT table_name FROM information_schema.tables WHERE table_schema='public' ORDER BY table_name;\")",
+      "Bash(npx vite *)"
+    ]
+  }
+}
