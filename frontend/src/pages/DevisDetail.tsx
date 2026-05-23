@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
-import { ArrowLeft, FileCheck, Trash2, Printer } from 'lucide-react';
+import { ArrowLeft, FileCheck, Trash2, Printer, Download } from 'lucide-react';
 import { devisService } from '@/services/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,6 +16,10 @@ export default function DevisDetail() {
   const [actionLoading, setActionLoading] = useState(false);
   const [showPrint, setShowPrint] = useState(false);
   const canConfirm = (statut: string) => ['brouillon', 'envoye'].includes(statut);
+  const downloadPDF = () => {
+    setShowPrint(true);
+    setTimeout(() => window.print(), 300);
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -108,6 +112,10 @@ export default function DevisDetail() {
           <Button variant="outline" onClick={() => setShowPrint(true)}>
             <Printer className="h-4 w-4 mr-2" />
             Imprimer
+          </Button>
+          <Button variant="outline" onClick={downloadPDF}>
+            <Download className="h-4 w-4 mr-2" />
+            Télécharger PDF
           </Button>
           {canConfirm(devis.statut) && (
             <Button onClick={handleConfirm} disabled={actionLoading}>

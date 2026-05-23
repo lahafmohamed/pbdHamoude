@@ -29,9 +29,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setUser(userData);
           localStorage.setItem('auth_user', JSON.stringify(userData));
         })
-        .catch(() => {
-          authService.logout();
-          setUser(null);
+        .catch((err: any) => {
+          // Only end the session if the token is actually rejected (401).
+          // Rate-limit (429), network, or server errors keep the stored session.
+          if (err?.response?.status === 401) {
+            authService.logout();
+            setUser(null);
+          }
         })
         .finally(() => setIsLoading(false));
     } else {

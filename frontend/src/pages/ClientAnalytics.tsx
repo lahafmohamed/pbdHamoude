@@ -88,10 +88,10 @@ export default function ClientAnalytics() {
           <p className="text-muted-foreground mt-1">Analyse détaillée de votre clientèle</p>
         </div>
         <div className="flex gap-2">
-          <Link to="/clients">
+          <Link to="/tiers">
             <Button variant="outline" className="gap-2">
               <Users className="h-4 w-4" />
-              Gérer les Clients
+              Gérer les Contacts
             </Button>
           </Link>
           <Button onClick={exportToCSV} className="gap-2">

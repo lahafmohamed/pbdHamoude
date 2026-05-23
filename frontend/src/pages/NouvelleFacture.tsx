@@ -416,12 +416,16 @@ export default function NouvelleFacture() {
                                 </button>
                                 <input
                                   className="w-10 text-center text-sm border-x py-1 font-mono bg-background focus:outline-none"
-                                  value={l.quantite}
-                                  onChange={(e) =>
-                                    updateLigne(i, {
-                                      quantite: Math.max(1, parseInt(e.target.value, 10) || 1),
-                                    })
-                                  }
+                                  value={l.quantite === 0 ? '' : l.quantite}
+                                  onChange={(e) => {
+                                    const n = parseInt(e.target.value, 10);
+                                    updateLigne(i, { quantite: Number.isNaN(n) ? 0 : n });
+                                  }}
+                                  onBlur={(e) => {
+                                    if (!e.target.value || parseInt(e.target.value, 10) < 1) {
+                                      updateLigne(i, { quantite: 1 });
+                                    }
+                                  }}
                                 />
                                 <button
                                   type="button"
@@ -436,12 +440,11 @@ export default function NouvelleFacture() {
                               <input
                                 type="number"
                                 step="0.01"
-                                value={l.prix_unitaire}
-                                onChange={(e) =>
-                                  updateLigne(i, {
-                                    prix_unitaire: Math.max(0, parseFloat(e.target.value) || 0),
-                                  })
-                                }
+                                value={l.prix_unitaire === 0 ? '' : l.prix_unitaire}
+                                onChange={(e) => {
+                                  const n = parseFloat(e.target.value);
+                                  updateLigne(i, { prix_unitaire: Number.isNaN(n) ? 0 : Math.max(0, n) });
+                                }}
                                 className={`w-28 px-2 py-1 text-right text-sm border rounded font-mono focus:outline-none focus:ring-1 focus:ring-ring ${
                                   priceOverridden ? 'bg-primary/10 border-primary/30' : 'bg-background'
                                 }`}

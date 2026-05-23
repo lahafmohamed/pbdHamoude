@@ -62,13 +62,8 @@ export function useERPShortcuts() {
     },
     {
       key: 'F3',
-      action: () => navigate('/clients'),
-      description: 'Clients',
-    },
-    {
-      key: 'F4',
-      action: () => navigate('/fournisseurs'),
-      description: 'Fournisseurs',
+      action: () => navigate('/tiers'),
+      description: 'Contacts',
     },
     {
       key: 'F5',

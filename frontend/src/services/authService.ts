@@ -14,22 +14,10 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Response interceptor to handle 401/403 and 429
-let isRateLimitAlertShown = false;
-
+// Response interceptor: only force logout on a real auth failure (401).
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    if (error.response?.status === 429) {
-      if (!isRateLimitAlertShown) {
-        isRateLimitAlertShown = true;
-        alert('Trop de requêtes. Veuillez attendre quelques minutes avant de réessayer.');
-        setTimeout(() => {
-          isRateLimitAlertShown = false;
-        }, 60000);
-      }
-      return Promise.reject(error);
-    }
     if (error.response?.status === 401) {
       localStorage.removeItem('auth_token');
       localStorage.removeItem('auth_user');

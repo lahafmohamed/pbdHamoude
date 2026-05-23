@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { formatFCFA as formatXOF } from '../utils/format';
-import { ArrowLeft, FileCheck, Truck, Printer } from 'lucide-react';
+import { ArrowLeft, FileCheck, Truck, Printer, Download } from 'lucide-react';
 import { bonLivraisonService } from '@/services/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -36,6 +36,10 @@ export default function BonLivraisonDetail() {
 
   const canMarkDelivered = bon?.statut === 'valide' || bon?.statut === 'brouillon';
   const canConvert = bon?.statut === 'livre';
+  const downloadPDF = () => {
+    setShowPrint(true);
+    setTimeout(() => window.print(), 300);
+  };
 
   const handleMarkDelivered = async () => {
     if (!bon?.id) return;
@@ -109,6 +113,10 @@ export default function BonLivraisonDetail() {
           <Button variant="outline" onClick={() => setShowPrint(true)}>
             <Printer className="h-4 w-4 mr-2" />
             Imprimer
+          </Button>
+          <Button variant="outline" onClick={downloadPDF}>
+            <Download className="h-4 w-4 mr-2" />
+            Télécharger PDF
           </Button>
           {canMarkDelivered && (
             <Button onClick={handleMarkDelivered} disabled={actionLoading}>

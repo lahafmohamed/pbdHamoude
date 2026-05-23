@@ -997,7 +997,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {[
                 { to: '/inventaire', label: 'Stock', Icon: Package },
-                { to: '/clients', label: 'Clients', Icon: Users },
+                { to: '/tiers', label: 'Contacts', Icon: Users },
                 { to: '/factures', label: 'Factures', Icon: FileText },
                 { to: '/commandes', label: 'Commandes', Icon: ShoppingCart },
                 { to: '/caisse', label: 'Caisse', Icon: Wallet },

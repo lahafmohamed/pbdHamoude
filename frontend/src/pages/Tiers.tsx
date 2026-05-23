@@ -57,7 +57,7 @@ export default function TiersPage() {
       setTiers(Array.isArray(rows) ? rows : []);
       setTotal(res?.pagination?.total ?? 0);
       setTotalPages(res?.pagination?.totalPages ?? 0);
-    } catch { toast.error('Erreur chargement tiers'); }
+    } catch { toast.error('Erreur chargement contacts'); }
     finally { setLoading(false); }
   };
 
@@ -87,7 +87,7 @@ export default function TiersPage() {
     try {
       if (editing) await tiersService.update(editing.id, formData);
       else await tiersService.create(formData);
-      toast.success(editing ? 'Tiers modifié' : 'Tiers créé');
+      toast.success(editing ? 'Contact modifié' : 'Contact créé');
       setShowForm(false);
       loadTiers();
     } catch (err: any) {
@@ -96,12 +96,12 @@ export default function TiersPage() {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm('Supprimer ce tiers ?')) return;
+    if (!confirm('Supprimer ce contact ?')) return;
     try {
       await tiersService.delete(id);
-      toast.success('Tiers supprimé');
+      toast.success('Contact supprimé');
       loadTiers();
-    } catch { toast.error('Impossible de supprimer ce tiers'); }
+    } catch { toast.error('Impossible de supprimer ce contact'); }
   };
 
   const soldeNetColor = (net: number) =>
@@ -112,11 +112,11 @@ export default function TiersPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2"><UserCheck className="h-6 w-6" /> Tiers</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">{total} tiers au total</p>
+          <h1 className="text-2xl font-bold flex items-center gap-2"><UserCheck className="h-6 w-6" /> Contacts</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">{total} contacts au total</p>
         </div>
         <Button onClick={openCreate} className="gap-2 self-start sm:self-auto">
-          <Plus className="h-4 w-4" /> Nouveau tiers
+          <Plus className="h-4 w-4" /> Nouveau contact
         </Button>
       </div>
 
@@ -141,17 +141,18 @@ export default function TiersPage() {
           {/* Search */}
           <div className="p-4 border-b">
             <div className="relative max-w-sm">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
               <Input
                 placeholder="Nom, téléphone, NIF, code..."
                 value={search}
                 onChange={e => { setSearch(e.target.value); setPage(1); }}
-                className="pl-9"
+                className="pl-10 sm:pl-10"
               />
             </div>
           </div>
 
           {/* Table */}
+          <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
@@ -175,7 +176,7 @@ export default function TiersPage() {
               {loading ? (
                 <TableRow><TableCell colSpan={8} className="text-center py-8 text-muted-foreground">Chargement...</TableCell></TableRow>
               ) : tiers.length === 0 ? (
-                <TableRow><TableCell colSpan={8} className="text-center py-8 text-muted-foreground">Aucun tiers trouvé</TableCell></TableRow>
+                <TableRow><TableCell colSpan={8} className="text-center py-8 text-muted-foreground">Aucun contact trouvé</TableCell></TableRow>
               ) : tiers.map(t => {
                 const soldeNet = (t.solde_net ?? (parseFloat(t.solde_client_live ?? 0) - parseFloat(t.solde_fournisseur_live ?? 0)));
                 return (
@@ -222,6 +223,7 @@ export default function TiersPage() {
               })}
             </TableBody>
           </Table>
+          </div>
 
           {totalPages > 1 && (
             <div className="p-4 border-t">
@@ -235,7 +237,7 @@ export default function TiersPage() {
       <Dialog open={showForm} onOpenChange={setShowForm}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>{editing ? 'Modifier le tiers' : 'Nouveau tiers'}</DialogTitle>
+            <DialogTitle>{editing ? 'Modifier le contact' : 'Nouveau contact'}</DialogTitle>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

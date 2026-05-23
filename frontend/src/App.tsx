@@ -9,13 +9,11 @@ import { useERPShortcuts } from './hooks/useKeyboardShortcuts';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Inventaire = lazy(() => import('./pages/Inventaire'));
-const Clients = lazy(() => import('./pages/Clients'));
 const ClientAnalytics = lazy(() => import('./pages/ClientAnalytics'));
 const Factures = lazy(() => import('./pages/Factures'));
 const FactureDetail = lazy(() => import('./pages/FactureDetail'));
 const NouvelleFacture = lazy(() => import('./pages/NouvelleFacture'));
 const StockValuation = lazy(() => import('./pages/StockValuation'));
-const Fournisseurs = lazy(() => import('./pages/Fournisseurs'));
 const Commandes = lazy(() => import('./pages/Commandes'));
 const CommandeDetail = lazy(() => import('./pages/CommandeDetail'));
 const Login = lazy(() => import('./pages/Login'));
@@ -91,19 +89,9 @@ function AppWithShortcuts() {
             <Layout><TiersDetail /></Layout>
           </ProtectedRoute>
         } />
-        <Route path="/clients" element={
-          <ProtectedRoute requiredRoles={['admin', 'manager']}>
-            <Layout><Clients /></Layout>
-          </ProtectedRoute>
-        } />
         <Route path="/clients/analytics" element={
           <ProtectedRoute requiredRoles={['admin', 'manager']}>
             <Layout><ClientAnalytics /></Layout>
-          </ProtectedRoute>
-        } />
-        <Route path="/fournisseurs" element={
-          <ProtectedRoute requiredRoles={['admin', 'manager', 'depot_staff']}>
-            <Layout><Fournisseurs /></Layout>
           </ProtectedRoute>
         } />
 

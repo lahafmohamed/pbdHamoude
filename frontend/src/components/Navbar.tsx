@@ -86,14 +86,12 @@ export default function Navbar() {
       ],
     }] : []),
 
-    // Tiers: admin, manager only
+    // Contacts (tiers): admin, manager only
     ...((isAdminOrManager) ? [{
-      label: 'Tiers',
+      label: 'Contacts',
       icon: Users,
       items: [
-        { path: '/tiers', label: 'Tiers', icon: UserCheck },
-        { path: '/clients', label: 'Clients', icon: Users },
-        { path: '/fournisseurs', label: 'Fournisseurs', icon: Truck },
+        { path: '/tiers', label: 'Contacts', icon: UserCheck },
         { path: '/employes', label: 'Employés', icon: UserCheck },
       ],
     }] : []),
